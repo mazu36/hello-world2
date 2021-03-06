@@ -23,8 +23,10 @@ jobs:
   print-my-name:
     docker:
       - image: circleci/node:13.8.0
+    environment:
+      user-name: $MY_NAME-test 
     steps:
-      - run: echo My name is << MY_NAME >>
+      - run: echo "My name is $MY_NAME"
 
 workflows:
   # Name the workflow "welcome"
@@ -32,6 +34,7 @@ workflows:
     # Run the welcome/run job in its own container
     jobs:
       - welcome/run
+      - print-my-name
       - print-hello
       - print-world:
           requires: [print-hello]
