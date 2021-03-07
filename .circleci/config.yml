@@ -19,7 +19,7 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - attach_workspace:
-        at: /tmp/test_workspace
+          at: /tmp/test_workspace
       - run: cat output.txt
 workflows:
   # Name the workflow "persistance_test"
