@@ -10,7 +10,7 @@ jobs:
     steps:
       - run: 
           name: Save hello world
-          command: echo "Hello world" > output.txt
+          command: echo "Hello world" > /tmp/test_workspace/output.txt
       - persist_to_workspace:
           root: /tmp/test_workspace
           paths: output.txt
@@ -20,7 +20,7 @@ jobs:
     steps:
       - attach_workspace:
           at: /tmp/test_workspace
-      - run: cat output.txt
+      - run: cat /tmp/test_workspace/output.txt
 workflows:
   # Name the workflow "persistance_test"
   persistance_test:
