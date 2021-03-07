@@ -8,6 +8,7 @@ jobs:
     docker:
       - image: circleci/node:13.8.0
     steps:
+      - run:  mkdir -p /tmp/test_workspace/
       - run: 
           name: Save hello world
           command: echo "Hello world" > /tmp/test_workspace/output.txt
