@@ -1,39 +1,17 @@
 # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
-# Use a package of configuration called an orb.
-
-commands:
-  print_pipeline_id:
-    description: Exercise for description
-    steps:
-      - run: echo $CIRCLE_WORKFLOW_ID
       
 # Orchestrate or schedule a set of jobs
 jobs:
-  save_hello_world_output:
+  hello_world_fail:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - print_pipeline_id
-      - run:  mkdir -p /tmp/test_workspace/
-      - run: 
-          name: Save hello world
-          command: echo "Hello world" > /tmp/test_workspace/output.txt
-      - persist_to_workspace:
-          root: /tmp/test_workspace
-          paths: output.txt
-  print_output_file:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - print_pipeline_id
-      - attach_workspace:
-          at: /tmp/test_workspace
-      - run: cat /tmp/test_workspace/output.txt
+      - run: return 1
+      - run: echo "Roll back is running..."
+          when: on_fail
 workflows:
-  # Name the workflow "persistance_test"
-  persistance_test:
+  # Name the workflow "my_exos"
+  my_exos:
     jobs:
-      - save_hello_world_output
-      - print_output_file:
-          requires: [save_hello_world_output]
+      - hello_world_fail
