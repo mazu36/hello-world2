@@ -8,7 +8,7 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - run: echo "testing failure"
-      - run: return 1 
+      - run: cat acbc
       - run: echo "Roll back is running"|
           when on_fail
 workflows:
